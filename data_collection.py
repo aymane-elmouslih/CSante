@@ -1,6 +1,12 @@
 import pandas as pd
 Path="/Users/utilisateur/Documents/CW_WEEK2/csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
 Path2="./Data/equip-serv-sante-com-2020.xlsx"
+#df = pd.read_excel (Path,sheet_name='2021',skiprows=[0,1,2,3],usecols=[0,1])
+
+
+#for x in df:
+ #   for n in df[x]:
+  #      L.append(n)
 
 #le code retourne une dataframe avec la population par département
 
