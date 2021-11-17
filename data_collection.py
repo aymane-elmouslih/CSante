@@ -1,6 +1,6 @@
 import pandas as pd
 import csv
-Path="./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
+Path="/Users/utilisateur/Documents/CW_WEEK2/csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
 Path2="./Data/equip-serv-sante-com-2020.xlsx"
 
 #le code retourne une dataframe avec la population par département
@@ -9,6 +9,7 @@ def dep_pop():
    dep_population=pd.read_excel("/Users/utilisateur/Documents/CW_WEEK2/csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021",usecols=[0,1,7],skiprows=[0,1,2,3,101, 102,103,104,105,106,107,108,109,110], names=["Numdép", "Nomdép", "Population"])
    return dep_population
    
+
 def df(Path,column):
 
     L=[]
@@ -32,6 +33,14 @@ def list_pourc_vieux():
         b=(int((a*100/nomb_total[i])*100))/100
         pourc_vieux.append(b)
     return pourc_vieux
+ 
+def dep_pop_et_plus65():
+    dep_pop_new= dep_pop()
+    part_agés= list_pourc_vieux()
+    dep_pop_new['part_agés']=part_agés
+    return dep_pop_new
+ 
+print(dep_pop_et_plus65())
 
 
 
