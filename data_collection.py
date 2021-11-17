@@ -45,9 +45,10 @@ def pourc_vieux(dep):
 print(pourc_vieux('04'))
 
 def data_des_agées():
-    data_des_agées=pd.DataFrame({'dep':df(Path,0),'pourc_vieux':pourc_vieux()})
+    data_des_agées=pd.DataFrame({'dep':df(Path,0),'pourc_vieux':list_pourc_vieux()})
     return data_des_agées
 
 
 
 print(data_des_agées())
+
