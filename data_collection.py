@@ -59,14 +59,3 @@ def data_des_agées():
 
 
 
-#print(data_des_agées())
-
-def data_des_agées_bis():
-   liste_moins_de65=[]
-   for x in list_pourc_agés():
-      liste_moins_de65.append(100-x)
-   pourc_agés_et_autres=data_des_agées()
-   pourc_agés_et_autres["pourc_moins65"]=liste_moins_de65
-   return pourc_agés_et_autres
-
-print(data_des_agées_bis())
