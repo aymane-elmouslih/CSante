@@ -1,5 +1,4 @@
 import pandas as pd
-import csv
 Path="/Users/utilisateur/Documents/CW_WEEK2/csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
 Path2="./Data/equip-serv-sante-com-2020.xlsx"
 
