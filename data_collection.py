@@ -22,21 +22,21 @@ def df(Path,column):
 
 
 
-def list_pourc_vieux():
+def list_pourc_agés():
     dep=df(Path,0)
-    nomb_vieux_1=df(Path,5)
-    nomb_vieux_2=df(Path,6)
-    pourc_vieux=[]
+    nomb_agés_1=df(Path,5)
+    nomb_agés_2=df(Path,6)
+    pourc_agés=[]
     nomb_total=df(Path,7)
-    for i in range(len(nomb_vieux_1)):
-        a=nomb_vieux_1[i]+nomb_vieux_2[2]
+    for i in range(len(nomb_agés_1)):
+        a=nomb_agés_1[i]+nomb_agés_2[2]
         b=(int((a*100/nomb_total[i])*100))/100
-        pourc_vieux.append(b)
-    return pourc_vieux
+        pourc_agés.append(b)
+    return pourc_agés
  
 def dep_pop_et_plus65():
     dep_pop_new= dep_pop()
-    part_agés= list_pourc_vieux()
+    part_agés= list_pourc_agés()
     dep_pop_new['part_agés']=part_agés
     return dep_pop_new
  
@@ -45,18 +45,28 @@ print(dep_pop_et_plus65())
 
 
 
-def pourc_vieux(dep):
-    L=list_pourc_vieux()
+def pourc_agés(dep):
+    L=list_pourc_agés()
     B=df(Path,0)
     i=B.index(dep)
     return L[i]
 
-print(pourc_vieux('04'))
+#print(pourc_agés('04'))
 
 def data_des_agées():
-    data_des_agées=pd.DataFrame({'dep':df(Path,0),'pourc_vieux':list_pourc_vieux()})
+    data_des_agées=pd.DataFrame({'dep':df(Path,0),'pourc_agés':list_pourc_agés()})
     return data_des_agées
 
 
 
-print(data_des_agées())
+#print(data_des_agées())
+
+def data_des_agées_bis():
+   liste_moins_de65=[]
+   for x in list_pourc_agés():
+      liste_moins_de65.append(100-x)
+   pourc_agés_et_autres=data_des_agées()
+   pourc_agés_et_autres["pourc_moins65"]=liste_moins_de65
+   return pourc_agés_et_autres
+
+print(data_des_agées_bis())
