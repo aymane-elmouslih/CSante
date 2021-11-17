@@ -11,7 +11,7 @@ Path2="./Data/equip-serv-sante-com-2020.xlsx"
 #le code retourne une dataframe avec la population par département.
 
 def dep_pop():  
-   dep_population=pd.read_excel("/Users/utilisateur/Documents/CW_WEEK2/csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021",usecols=[0,1,7],skiprows=[0,1,2,3,101, 102,103,104,105,106,107,108,109,110], names=["Numdép", "Nomdép", "Population"])
+   dep_population=pd.read_excel("/Users/utilisateur/Documents/CW_WEEK2/csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021",usecols=[0,1,7],skiprows=[0,1,2,3,101,107,108,109,110], names=["Numdép", "Nomdép", "Population"])
    return dep_population
    
 
@@ -19,8 +19,8 @@ def df(Path,column):
 
     L=[]
     i=column
-    df = pd.read_excel (Path,sheet_name='2021',skiprows=[0,1,2,3,108,107,106,103,104,105,111,112
-    ,110,109,102,101],usecols=[i],names='A')
+    df = pd.read_excel (Path,sheet_name='2021',skiprows=[0,1,2,3,108,107,111,112
+    ,110,109,101],usecols=[i],names='A')
     for i in range(len(df['A'])):
         L.append(df['A'][i])
     return L
