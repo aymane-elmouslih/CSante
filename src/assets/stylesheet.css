@@ -1,0 +1,41 @@
+.banner {
+    height: 75px;
+    margin: 0px -10px 10px;
+    background-color: rgb(66, 129, 247);
+    border-radius: 2px;
+}
+
+.banner h2{
+    color: rgb(77, 136, 204);
+    padding-top: 10px;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+.banner Img{
+    position: relative;
+    float: right;
+    right: 10px;
+    top: -60px;
+    height: 75px;
+}
+
+body {
+    font-family: sans-serif;
+    background-color:rgb(29, 69, 180)
+}
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(255, 255, 255)
+}
+
+.app-header {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: thin lightgrey solid;
+}
+
+.app-header .app-header--title {
+    font-size: 22px;
+    padding-left: 5px;
+}
+
