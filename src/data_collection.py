@@ -63,7 +63,7 @@ def pourc_agés(dep):
     i = B.index(dep)
     return L[i]
 
-
+#retourne un dataframe des services par département
 def data():
     df = pd.read_excel("./Data/equip-serv-sante-com-2020.xlsx", skiprows=[0, 1, 2, 3, 5])
     vardp = df.groupby('Département').sum()
@@ -78,7 +78,7 @@ def data():
 
 
 
-#Le Dataframe final qui contient tout les colonnes est l'output de la fonction Df()
+#Le Dataframe final qui contient tout les colonnes[services ..., population, pourcentage des agés] est l'output de la fonction Df()
 def Df():
     d = pd.read_excel(".\Data\equip-serv-sante-com-2020.xlsx",
                       skiprows=[0, 1, 2, 3, 5])
