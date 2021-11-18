@@ -1,5 +1,5 @@
 import json
-from data_collection import Df
+from data_collection import *
 import dash
 from dash import dcc
 from dash import html
@@ -207,41 +207,54 @@ def update_graph2(option_slctd):
     [Output(component_id='indicateur', component_property='figure')],
     [Input(component_id='map', component_property='clickData')]
 )
-def indicateur(numero_dep):  # variable entree == int
-    vardp = data()
+def indicateur(numero_dep):
+    # variable entree == int
 
-    # département selon le nombres de leurs equipements == fig1
+    if numero_dep != None:
+        vardp = data()
+        num = int(numero_dep['points'][0]['location'])
 
-    nombre_equipement = pd.DataFrame(vardp.sum(axis=1, numeric_only=True))
-    nombre_equipement.columns = ["nombre d'équipement"]
-    fig1 = px.bar(nombre_equipement)
-    coeff = (nombre_equipement.iloc[numero_dep-1,
-             0]/dep_pop().iloc[numero_dep-1, 2])*(10**4)
+        nombre_equipement = pd.DataFrame(vardp.sum(axis=1, numeric_only=True))
+        nombre_equipement.columns = ["nombre d'équipement"]
+        coeff = (nombre_equipement.iloc[num-1,
+                                        0]/dep_pop().iloc[num-1, 2])*(10**4)
     # choix couleur indicateur
-    indic_color = "orange"
-    if coeff > 8.34:
-        indic_color = "green"
+        indic_color = "orange"
+        if coeff > 8.34:
+            indic_color = "green"
 
     # indicateur
-    fig3 = go.Figure(go.Indicator(
-        mode="gauge+number+delta",
-        value=coeff,
-        domain={'x': [0, 1], 'y': [0, 1]},
-        title={'text': "Indicateur santé"},
-        delta={'reference': 8.34},
-        gauge={
-            'axis': {'range': [None, 35]},
-            'bar': {'color': indic_color},
-            'steps': [
-                {'range': [0, 8.34], 'color': 'lightgray'},
-                {'range': [8.34, 35], 'color': 'gray'}],
-        }
-    ))
-    return fig3
+        fig3 = go.Figure(go.Indicator(
+            mode="gauge+number+delta",
+            value=coeff,
+            domain={'x': [0, 1], 'y': [0, 1]},
+            title={'text': "Indicateur santé"},
+            delta={'reference': 8.34},
+            gauge={
+                'axis': {'range': [None, 35]},
+                'bar': {'color': indic_color},
+                'steps': [
+                    {'range': [0, 8.34], 'color': 'lightgray'},
+                    {'range': [8.34, 35], 'color': 'gray'}],
+            }
+        ))
+        return [fig3]
+    else:
+        fig3 = go.Figure(go.Indicator(
+            mode="gauge+number+delta",
+            value=0,
+            domain={'x': [0, 1], 'y': [0, 1]},
+            title={'text': "Indicateur santé"},
+            delta={'reference': 8.34},
+            gauge={
+                'axis': {'range': [None, 35]},
+                'bar': {'color': 'green'},
+                'steps': [
+                    {'range': [0, 8.34], 'color': 'lightgray'},
+                    {'range': [8.34, 35], 'color': 'gray'}], }))
+        return [fig3]
 
 
 if __name__ == '__main__':
     app.run_server(debug=True)
     app = dash.Dash(__name__, prevent_initial_callbacks=True)
-
-    # hi
