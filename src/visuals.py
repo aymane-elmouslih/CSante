@@ -126,14 +126,12 @@ app.layout = html.Div(children=[html.Div([
     dcc.Graph(
         id='graphs2',
         figure={}
-    )
+    ),
+
+    html.A(children=[html.H3(children="BD Dénombrement des équipements en 2020")],href='https://www.insee.fr/fr/statistiques/3568611?sommaire=3568656&fbclid=IwAR0s69rKZcKILzaatbwaBz78yomNLbZ4XU_f7bUsgOEzUuCPWwD8PyJaSgs'),
 
 
-
-
-
-
-
+    html.A(children=[html.H3(children="BD Population légale de l’Île-de-France")],href='https://www.insee.fr/fr/statistiques/4270719')
 
 ])
 
