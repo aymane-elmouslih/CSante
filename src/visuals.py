@@ -30,11 +30,10 @@ for feature in map['features']:
 # fig.update_geos(fitbounds="locations", visible=False)
 
 
-
 app.layout = html.Div(children=[html.Div([
 
-    html.H1(children="Répartition pharmaceutique"),
-    html.Img(src="/assets/medicine.png")],className="banner"),
+    html.H1(children="____CSanté________________________________"),
+    html.Img(src="/assets/medicine.png")], className="banner"),
 
 
 
@@ -82,7 +81,7 @@ app.layout = html.Div(children=[html.Div([
                      {"label": "Établissement thermal", "value": "Établissement thermal"}, ],
                  multi=False,
                  value='Pharmacie',
-                 style={'width': "40%"}
+                 style={'width': "40%", 'position': 'relative', 'zIndex': 999}
                  ),
 
 
@@ -98,7 +97,7 @@ app.layout = html.Div(children=[html.Div([
                      {"label": "stamen-terrain", "value": "stamen-terrain"}],
                     multi=False,
                  value='carto-positron',
-                 style={'width': "40%"}
+                 style={'width': "40%", 'position': 'relative', 'zIndex': 950}
                  ),
 
 
@@ -109,7 +108,7 @@ app.layout = html.Div(children=[html.Div([
                      {"label": "Viridis", "value": "Viridis"}],
                     multi=False,
                  value='Viridis',
-                 style={'width': "40%"}
+                 style={'width': "40%", 'position': 'relative', 'zIndex': 900}
                  ),
 
 
@@ -122,16 +121,18 @@ app.layout = html.Div(children=[html.Div([
     dcc.Graph(
         id='graphs',
         figure={}
-    ),
+),
     dcc.Graph(
         id='graphs2',
         figure={}
-    ),
+),
 
-    html.A(children=[html.H3(children="BD Dénombrement des équipements en 2020")],href='https://www.insee.fr/fr/statistiques/3568611?sommaire=3568656&fbclid=IwAR0s69rKZcKILzaatbwaBz78yomNLbZ4XU_f7bUsgOEzUuCPWwD8PyJaSgs'),
+    html.A(children=[html.H3(children="BD Dénombrement des équipements en 2020")],
+           href='https://www.insee.fr/fr/statistiques/3568611?sommaire=3568656&fbclid=IwAR0s69rKZcKILzaatbwaBz78yomNLbZ4XU_f7bUsgOEzUuCPWwD8PyJaSgs'),
 
 
-    html.A(children=[html.H3(children="BD Population légale de l’Île-de-France")],href='https://www.insee.fr/fr/statistiques/4270719')
+    html.A(children=[html.H3(children="BD Population légale de l’Île-de-France")],
+           href='https://www.insee.fr/fr/statistiques/4270719')
 
 ])
 
@@ -163,52 +164,46 @@ def update_map(option_slctd1, option_slctd2, option_slctd3):
     fig.update_geos(fitbounds="locations", visible=False)
     return [fig]
 
+
 @ app.callback(
-    [ Output(component_id='graphs', component_property='figure')],
+    [Output(component_id='graphs', component_property='figure')],
     [Input(component_id='map', component_property='clickData'),
-    ]
-)    
+     ]
+)
 def update_graph(option_slctd):
     names = ['Pourcentage des agés', 'pourcentage des jeunes']
     if option_slctd != None:
-        s=option_slctd['points'][0]['location']
+        s = option_slctd['points'][0]['location']
         L = Df['id'].tolist()
         i = L.index(s)
         x = [Df['pourcentage_agées'][i], 100 - Df['pourcentage_agées'][i]]
         cam = px.pie(values=x, names=names)
     else:
-        cam= px.pie(values=[50,50], names=names)    
+        cam = px.pie(values=[50, 50], names=names)
     return [cam]
+
 
 @ app.callback(
-    [ Output(component_id='graphs2', component_property='figure')],
+    [Output(component_id='graphs2', component_property='figure')],
     [Input(component_id='map', component_property='clickData'),
-    ]
-)        
-
+     ]
+)
 def update_graph2(option_slctd):
-    names = ['Établissement santé court séjour', 'Établissement santé moyen séjour', 'Établissement santé long séjour', 'Établissement psychiatrique', 'Centre lutte cancer', 'Urgences', 'Maternité', 'Centre de santé', 'Structures psychiatriques en ambulatoire', 'Centre médecine préventive', 'Dialyse', 'Hospitalisation à domicile', 'Maison de santé pluridisciplinaire', "Laboratoire d'analyses et de biologie médicale", 'Ambulance', 'Transfusion sanguine', 'Établissement thermal', 'Pharmacie', ]
+    names = ['Établissement santé court séjour', 'Établissement santé moyen séjour', 'Établissement santé long séjour', 'Établissement psychiatrique', 'Centre lutte cancer', 'Urgences', 'Maternité', 'Centre de santé', 'Structures psychiatriques en ambulatoire',
+             'Centre médecine préventive', 'Dialyse', 'Hospitalisation à domicile', 'Maison de santé pluridisciplinaire', "Laboratoire d'analyses et de biologie médicale", 'Ambulance', 'Transfusion sanguine', 'Établissement thermal', 'Pharmacie', ]
     if option_slctd != None:
-        s=option_slctd['points'][0]['location']
+        s = option_slctd['points'][0]['location']
         L = Df['id'].tolist()
         i = L.index(s)
-        x = [Df['Établissement santé court séjour'][i],Df['Établissement santé moyen séjour'][i],Df['Établissement santé long séjour'][i],Df['Établissement psychiatrique'][i],Df['Centre lutte cancer'][i],Df['Urgences'][i],Df['Maternité'][i],Df['Centre de santé'][i], Df['Structures psychiatriques en ambulatoire'][i],Df[ 'Centre médecine préventive'][i], Df['Dialyse'][i], Df['Hospitalisation à domicile'][i], Df['Maison de santé pluridisciplinaire'][i], Df["Laboratoire d'analyses et de biologie médicale"][i], Df['Ambulance'][i], Df['Transfusion sanguine'][i], Df['Établissement thermal'][i], Df['Pharmacie'][i]]
-        d=pd.DataFrame({'x':names,'y':x})
-        cam = px.bar(d,x='x', y='y')
+        x = [Df['Établissement santé court séjour'][i], Df['Établissement santé moyen séjour'][i], Df['Établissement santé long séjour'][i], Df['Établissement psychiatrique'][i], Df['Centre lutte cancer'][i], Df['Urgences'][i], Df['Maternité'][i], Df['Centre de santé'][i], Df['Structures psychiatriques en ambulatoire']
+             [i], Df['Centre médecine préventive'][i], Df['Dialyse'][i], Df['Hospitalisation à domicile'][i], Df['Maison de santé pluridisciplinaire'][i], Df["Laboratoire d'analyses et de biologie médicale"][i], Df['Ambulance'][i], Df['Transfusion sanguine'][i], Df['Établissement thermal'][i], Df['Pharmacie'][i]]
+        d = pd.DataFrame({'Services de santé': names, 'Nombre': x})
+        cam = px.bar(d, x='Services de santé', y='Nombre')
     else:
-        x=[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]    
-        d=pd.DataFrame({'x':names,'y':x})
-        cam = px.bar(d,x='x', y='y')
+        x = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        d = pd.DataFrame({'Services de santé': names, 'Nombre': x})
+        cam = px.bar(d, x='Services de santé', y='Nombre')
     return [cam]
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
