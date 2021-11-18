@@ -1,5 +1,4 @@
 import pandas as pd
-import population as popu
 from src.data_collection import data 
 
 df = data()
