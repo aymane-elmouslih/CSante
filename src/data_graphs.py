@@ -4,8 +4,6 @@ import data_collection
 import plotly.graph_objects as go
 from data_collection import Df
 
-#fig = px.bar(data_collection.dep_pop(), x="Nomdép", y="Population")
-# fig.show()   exemple de Bar Chart
 
 # Pour un pie chart, on a besoin d'une dataframe prête à être utilisée
 # On la récupère dans data_collection
@@ -13,7 +11,7 @@ from data_collection import Df
 D = Df()
 
 
-def camambert(x):
+def camembert(x):
     L = D['id'].tolist()
     i = L.index(x)
     x = [D['pourcentage_agées'][i], 100 - D['pourcentage_agées'][i]]
@@ -22,7 +20,7 @@ def camambert(x):
     cam.show()
 
 
-#camambert('09')
+#camembert('09')
 
 # n est le STRING constitué du numéro du département souhaité.
 
