@@ -3,9 +3,6 @@ import pandas as pd
 import data_collection
 import plotly.graph_objects as go
 
-fig=px.bar(data_collection.dep_pop(),x="Nomdép",y="Population")
-#fig.show()   exemple de Bar Chart
-
 # Pour un pie chart, on a besoin d'une dataframe prête à être utilisée
 # On la récupère dans data_collection
 #le code suivant donne pour chaque département un visuel sous forme de camembert de la part de la population agée de plus de 65 ans
