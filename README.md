@@ -4,4 +4,4 @@ Le projet CSanté a pour objectif de dresser une plateforme permettant d'analyse
 
 ## Installation
 
-Utiliser pip pour installer les modules nécessaires, indiqués dans le fichier requirements.txt
+Utiliser pip pour installer les packages nécessaires, indiqués dans le fichier requirements.txt. Attention à bien installer les versions mentionnées des différents packages, ou des versions ultérieures.
