@@ -15,7 +15,7 @@ Df = Df()
 
 
 app = dash.Dash(__name__)
-map = json.load(open(".\csante\Data\contour-des-departements.geojson", 'r'))
+map = json.load(open("Data\contour-des-departements.geojson", 'r'))
 data = Df[['Pharmacie', 'id']]
 
 for feature in map['features']:
@@ -30,9 +30,13 @@ for feature in map['features']:
 # fig.update_geos(fitbounds="locations", visible=False)
 
 
-app.layout = html.Div(children=[
 
-    html.H1(children="Group 'ConnectionS'"),
+app.layout = html.Div(children=[html.Div([
+
+    html.H1(children="Répartition pharmaceutique"),
+    html.Img(src="/assets/medicine.png")],className="banner"),
+
+
 
 
 
@@ -211,4 +215,4 @@ def update_graph2(option_slctd):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-    app = dash.Dash(_name_, prevent_initial_callbacks=True)
+    app = dash.Dash(__name__, prevent_initial_callbacks=True)
