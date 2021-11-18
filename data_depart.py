@@ -7,7 +7,7 @@ import population as popu
 pio.renderers.default = "browser"
 
 def data():
-    df = pd.read_excel("/Users/ibrah/csante/Data/equip-serv-sante-com-2020.xlsx", skiprows=[0, 1, 2, 3, 5])
+    df = pd.read_excel("./Data/equip-serv-sante-com-2020.xlsx", skiprows=[0, 1, 2, 3, 5])
     vardp = df.groupby('Département').sum()
     vardp = vardp.drop(['Région'], axis=1)
     vardp['id'] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '2A', '2B', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',

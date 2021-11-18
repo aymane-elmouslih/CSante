@@ -1,6 +1,6 @@
 import pandas as pd
 import population as popu
-from data_depart import data 
+from src.data_collection import data 
 
 df = data()
 

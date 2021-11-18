@@ -15,7 +15,7 @@ def dep_pop():
     dep_population = pd.read_excel("./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021", usecols=[
                                    0, 1, 7], skiprows=[0, 1, 2, 3, 101, 107, 108, 109, 110], names=["Numdép", "Nomdép", "Population"])
     return dep_population
-
+print(dep_pop())
 # donne la liste des élements d'une colonne d'un fichier excel
 def df(Path, column):
 
