@@ -15,7 +15,7 @@ def camembert(x):
     L = D['id'].tolist()
     i = L.index(x)
     x = [D['pourcentage_agées'][i], 100 - D['pourcentage_agées'][i]]
-    names = ['Pourcentage des agés', 'pourcentage des jeunes']
+    names = ['Pourcentage des plus de  65 ans', 'pourcentage des moins de 65 ans']
     cam = px.pie(values=x, names=names)
     cam.show()
 
