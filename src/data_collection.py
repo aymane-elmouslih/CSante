@@ -16,7 +16,7 @@ def dep_pop():
                                    0, 1, 7], skiprows=[0, 1, 2, 3, 101, 107, 108, 109, 110], names=["Numdép", "Nomdép", "Population"])
     return dep_population
 
-# donne la liste des élemnts d' une colonne d' un fichier excel
+# donne la liste des élements d'une colonne d'un fichier excel
 def df(Path, column):
 
     L = []
@@ -27,7 +27,7 @@ def df(Path, column):
         L.append(df['A'][i])
     return L
 
-# liste des pourcentages des agés par département
+# liste des pourcentages des personnes agées de plus de 65 ans par département
 
 
 def list_pourc_agés():
@@ -56,7 +56,7 @@ def nomb_population():
     total = df(Path, 7)
     return total
 
-#fonction qui donne pour chaque departement le pourcentage des agés associé
+#fonction qui donne pour chaque departement le pourcentage des personnes agées de plus de 65 ans associé
 def pourc_agés(dep):
     L = list_pourc_agés()
     B = df(Path, 0)
@@ -67,12 +67,12 @@ def pourc_agés(dep):
 
 
 
-#Le Dataframe final qui contient tout les colonnes est le output de la fonction Df()
+#Le Dataframe final qui contient tout les colonnes est l'output de la fonction Df()
 def Df():
     d = pd.read_excel(".\Data\equip-serv-sante-com-2020.xlsx",
                       skiprows=[0, 1, 2, 3, 5])
     Df = d.groupby('Département').sum()
-    Df = Df.drop(['Région'], axis=1)  # les columns non utiles
+    Df = Df.drop(['Région'], axis=1)  # les colonnes non utiles
     Df['id'] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '2A', '2B', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
                 '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '971', '972', '973', '974', '976']
     d = {'01': 'Ain - Bourg-en-bresse', '02': ' Aisne - Laon', '03': ' Allier - Moulins', '04': ' Alpes-de-Haute-Provence - Digne-les-bains', '05': ' Hautes-alpes - Gap', '06': ' Alpes-maritimes - Nice', '07': ' Ardèche - Privas', '08': ' Ardennes - Charleville-mézières', '09': ' Ariège - Foix', '10': ' Aube - Troyes', '11': ' Aude - Carcassonne', '12': ' Aveyron - Rodez', '13': ' Bouches-du-Rhône - Marseille', '14': ' Calvados - Caen', '15': ' Cantal - Aurillac', '16': ' Charente - Angoulême', '17': ' Charente-maritime - La rochelle', '18': ' Cher - Bourges', '19': ' Corrèze - Tulle', '2A': ' Corse-du-sud - Ajaccio', '2B': ' Haute-Corse - Bastia', '21': "Côte-d'Or - Dijon", '22': "Côtes-d'Armor - Saint-brieuc", '23': ' Creuse - Guéret', '24': ' Dordogne - Périgueux', '25': ' Doubs - Besançon', '26': ' Drôme - Valence', '27': ' Eure - Évreux', '28': ' Eure-et-loir - Chartres', '29': ' Finistère - Quimper', '30': ' Gard - Nîmes', '31': ' Haute-garonne - Toulouse', '32': ' Gers - Auch', '33': ' Gironde - Bordeaux', '34': ' Hérault - Montpellier', '35': ' Ille-et-vilaine - Rennes', '36': ' Indre - Châteauroux', '37': ' Indre-et-loire - Tours', '38': ' Isère - Grenoble', '39': ' Jura - Lons-le-saunier', '40': ' Landes - Mont-de-marsan', '41': ' Loir-et-cher - Blois', '42': ' Loire - Saint-étienne', '43': ' Haute-loire - Le puy-en-velay', '44': ' Loire-atlantique - Nantes', '45': ' Loiret - Orléans', '46': ' Lot - Cahors', '47': ' Lot-et-garonne - Agen', '48': ' Lozère - Mende', '49': ' Maine-et-loire - Angers', '50': ' Manche - Saint-lô',
