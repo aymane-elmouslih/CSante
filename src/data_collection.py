@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from numpy import log2
 import pandas as pd
 Path = "./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
 Path2 = "./Data/equip-serv-sante-com-2020.xlsx"
