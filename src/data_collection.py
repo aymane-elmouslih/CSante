@@ -1,24 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from numpy import log2
 import pandas as pd
-Path = "Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
-Path2 = "Data/equip-serv-sante-com-2020.xlsx"
+Path = "./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
+Path2 = "./Data/equip-serv-sante-com-2020.xlsx"
 #df = pd.read_excel (Path,sheet_name='2021',skiprows=[0,1,2,3],usecols=[0,1])
 
 
-# for x in df:
-#   for n in df[x]:
-#      L.append(n)
 
 # le code retourne une dataframe avec la population par département.
 
 def dep_pop():
-    dep_population = pd.read_excel("Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021", usecols=[
+    dep_population = pd.read_excel("./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021", usecols=[
                                    0, 1, 7], skiprows=[0, 1, 2, 3, 101, 107, 108, 109, 110], names=["Numdép", "Nomdép", "Population"])
     return dep_population
 
-
+# donne la liste des élemnts d' une colonne d' un fichier excel
 def df(Path, column):
 
     L = []
@@ -29,7 +27,7 @@ def df(Path, column):
         L.append(df['A'][i])
     return L
 
-# li
+# liste des pourcentages des agés par département
 
 
 def list_pourc_agés():
@@ -44,39 +42,34 @@ def list_pourc_agés():
         pourc_agés.append(b)
     return pourc_agés
 
-
+#dataframe [département, population, part_agés]
 def dep_pop_et_plus65():
     dep_pop_new = dep_pop()
     part_agés = list_pourc_agés()
     dep_pop_new['part_agés'] = part_agés
     return dep_pop_new
 
-# print(dep_pop_et_plus65())
+# liste des données de population par département
 
 
 def nomb_population():
     total = df(Path, 7)
     return total
 
-
+#fonction qui donne pour chaque departement le pourcentage des agés associé
 def pourc_agés(dep):
     L = list_pourc_agés()
     B = df(Path, 0)
     i = B.index(dep)
     return L[i]
 
-# print(pourc_agés('01'))
 
 
-def data_des_agées():
-    data_des_agées = pd.DataFrame(
-        {'dep': df(Path, 0), 'pourc_agés': list_pourc_agés()})
-    return data_des_agées
 
 
-# Dataframe final est le output de la fonction Df()
+#Le Dataframe final qui contient tout les colonnes est le output de la fonction Df()
 def Df():
-    d = pd.read_excel("Data\equip-serv-sante-com-2020.xlsx",
+    d = pd.read_excel(".\Data\equip-serv-sante-com-2020.xlsx",
                       skiprows=[0, 1, 2, 3, 5])
     Df = d.groupby('Département').sum()
     Df = Df.drop(['Région'], axis=1)  # les columns non utiles
@@ -87,9 +80,7 @@ def Df():
     s = list(d.values())
     Df['Département_name'] = s
 
-    # f=data_des_agées().groupby('dep').sum()
-    # t=f.groupby('dep').sum()
-    # print(t)
+
     l = list_pourc_agés()
     j = nomb_population()
     Df['pourcentage_agées'] = l
@@ -98,3 +89,4 @@ def Df():
 
 
 #print(Df())
+
