@@ -20,11 +20,18 @@
     height: 75px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h4, h5, h6 {
     color: rgb(255, 255, 255);
     position: relative;
     font-size: 60px;
-    left;:40px
+    left:40px;
+
+}
+h3 {
+    color: rgb(255, 255, 255);
+    position: relative;
+    font-size: 30px;
+    left:40px;
 
 }
 
