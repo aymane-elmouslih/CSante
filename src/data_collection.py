@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 from numpy import log2
 import pandas as pd
-Path = "./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
-Path2 = "./Data/equip-serv-sante-com-2020.xlsx"
+Path = ".\csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx"
+Path2 = ".\csante/Data/equip-serv-sante-com-2020.xlsx"
 #df = pd.read_excel (Path,sheet_name='2021',skiprows=[0,1,2,3],usecols=[0,1])
 
 
@@ -14,7 +14,7 @@ Path2 = "./Data/equip-serv-sante-com-2020.xlsx"
 # le code retourne une dataframe avec la population par département.
 
 def dep_pop():
-    dep_population = pd.read_excel("./Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021", usecols=[
+    dep_population = pd.read_excel(".\csante/Data/estim-pop-dep-sexe-gca-1975-2021.xlsx", sheet_name="2021", usecols=[
                                    0, 1, 7], skiprows=[0, 1, 2, 3, 101, 107, 108, 109, 110], names=["Numdép", "Nomdép", "Population"])
     return dep_population
 
@@ -76,7 +76,7 @@ def data_des_agées():
 
 # Dataframe final est le output de la fonction Df()
 def Df():
-    d = pd.read_excel(".\Data\equip-serv-sante-com-2020.xlsx",
+    d = pd.read_excel(".\csante\Data\equip-serv-sante-com-2020.xlsx",
                       skiprows=[0, 1, 2, 3, 5])
     Df = d.groupby('Département').sum()
     Df = Df.drop(['Région'], axis=1)  # les columns non utiles
@@ -97,4 +97,4 @@ def Df():
     return Df
 
 
-print(Df())
+#print(Df())

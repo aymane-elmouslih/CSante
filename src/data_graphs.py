@@ -15,7 +15,6 @@ D = Df()
 
 def camambert(x):
     L = D['id'].tolist()
-    print(L)
     i = L.index(x)
     x = [D['pourcentage_agées'][i], 100 - D['pourcentage_agées'][i]]
     names = ['Pourcentage des agés', 'pourcentage des jeunes']
@@ -23,7 +22,7 @@ def camambert(x):
     cam.show()
 
 
-camambert('09')
+#camambert('09')
 
 # n est le STRING constitué du numéro du département souhaité.
 
@@ -108,3 +107,4 @@ def pie_chart(n):
 
 # print(pie_chart("975"))
 # pie_chart("05")
+print(D.columns.tolist())

@@ -15,7 +15,7 @@ Df = Df()
 
 
 app = dash.Dash(__name__)
-map = json.load(open(".\Data\contour-des-departements.geojson", 'r'))
+map = json.load(open(".\csante\Data\contour-des-departements.geojson", 'r'))
 data = Df[['Pharmacie', 'id']]
 
 for feature in map['features']:
@@ -118,6 +118,10 @@ app.layout = html.Div(children=[
     dcc.Graph(
         id='graphs',
         figure={}
+    ),
+    dcc.Graph(
+        id='graphs2',
+        figure={}
     )
 
 
@@ -137,19 +141,19 @@ app.layout = html.Div(children=[
      Input(component_id="slct_couleure", component_property='value'),
      Input(component_id='servise', component_property='value')]
 )
-def update_graph(option_slctd1, option_slctd2, option_slctd3):
+def update_map(option_slctd1, option_slctd2, option_slctd3):
     if option_slctd2 == 1:
-        fig = px.choropleth_mapbox(Df, locations='id', geojson=map, color=option_slctd3, hover_name='Département_name', hover_data=['Établissement santé court séjour', 'Établissement santé moyen séjour', 'Établissement santé long séjour', 'Établissement psychiatrique', 'Centre lutte cancer', 'Urgences', 'Maternité', 'Centre de santé', 'Structures psychiatriques en ambulatoire', 'Centre médecine préventive', 'Dialyse', 'Hospitalisation à domicile', 'Maison de santé pluridisciplinaire', "Laboratoire d'analyses et de biologie médicale", 'Ambulance', 'Transfusion sanguine', 'Établissement thermal', 'Pharmacie'],
+        fig = px.choropleth_mapbox(Df, locations='id', geojson=map, color=option_slctd3, hover_name='Département_name', hover_data=[option_slctd3],
                                    mapbox_style=option_slctd1,
                                    center={"lat": 47, "lon": 2},
                                    zoom=5, opacity=0.8, color_continuous_scale=px.colors.diverging.BrBG)
     elif option_slctd2 == 2:
-        fig = px.choropleth_mapbox(Df, locations='id', geojson=map, color=option_slctd3, hover_name='Département_name', hover_data=['Établissement santé court séjour', 'Établissement santé moyen séjour', 'Établissement santé long séjour', 'Établissement psychiatrique', 'Centre lutte cancer', 'Urgences', 'Maternité', 'Centre de santé', 'Structures psychiatriques en ambulatoire', 'Centre médecine préventive', 'Dialyse', 'Hospitalisation à domicile', 'Maison de santé pluridisciplinaire', "Laboratoire d'analyses et de biologie médicale", 'Ambulance', 'Transfusion sanguine', 'Établissement thermal', 'Pharmacie'],
+        fig = px.choropleth_mapbox(Df, locations='id', geojson=map, color=option_slctd3, hover_name='Département_name', hover_data=[option_slctd3],
                                    mapbox_style=option_slctd1,
                                    center={"lat": 47, "lon": 2},
                                    zoom=5, opacity=0.8, color_continuous_scale=px.colors.sequential.Cividis_r)
     else:
-        fig = px.choropleth_mapbox(Df, locations='id', geojson=map, color=option_slctd3, hover_name='Département_name', hover_data=['Établissement santé court séjour', 'Établissement santé moyen séjour', 'Établissement santé long séjour', 'Établissement psychiatrique', 'Centre lutte cancer', 'Urgences', 'Maternité', 'Centre de santé', 'Structures psychiatriques en ambulatoire', 'Centre médecine préventive', 'Dialyse', 'Hospitalisation à domicile', 'Maison de santé pluridisciplinaire', "Laboratoire d'analyses et de biologie médicale", 'Ambulance', 'Transfusion sanguine', 'Établissement thermal', 'Pharmacie'],
+        fig = px.choropleth_mapbox(Df, locations='id', geojson=map, color=option_slctd3, hover_name='Département_name', hover_data=[option_slctd3],
                                    mapbox_style=option_slctd1,
                                    center={"lat": 47, "lon": 2},
                                    zoom=5, opacity=0.8, color_continuous_scale='Viridis')
@@ -157,6 +161,54 @@ def update_graph(option_slctd1, option_slctd2, option_slctd3):
     fig.update_geos(fitbounds="locations", visible=False)
     return [fig]
 
+@ app.callback(
+    [ Output(component_id='graphs', component_property='figure')],
+    [Input(component_id='map', component_property='clickData'),
+    ]
+)    
+def update_graph(option_slctd):
+    names = ['Pourcentage des agés', 'pourcentage des jeunes']
+    if option_slctd != None:
+        s=option_slctd['points'][0]['location']
+        L = Df['id'].tolist()
+        i = L.index(s)
+        x = [Df['pourcentage_agées'][i], 100 - Df['pourcentage_agées'][i]]
+        cam = px.pie(values=x, names=names)
+    else:
+        cam= px.pie(values=[50,50], names=names)    
+    return [cam]
+
+@ app.callback(
+    [ Output(component_id='graphs2', component_property='figure')],
+    [Input(component_id='map', component_property='clickData'),
+    ]
+)        
+
+def update_graph2(option_slctd):
+    names = ['Établissement santé court séjour', 'Établissement santé moyen séjour', 'Établissement santé long séjour', 'Établissement psychiatrique', 'Centre lutte cancer', 'Urgences', 'Maternité', 'Centre de santé', 'Structures psychiatriques en ambulatoire', 'Centre médecine préventive', 'Dialyse', 'Hospitalisation à domicile', 'Maison de santé pluridisciplinaire', "Laboratoire d'analyses et de biologie médicale", 'Ambulance', 'Transfusion sanguine', 'Établissement thermal', 'Pharmacie', ]
+    if option_slctd != None:
+        s=option_slctd['points'][0]['location']
+        L = Df['id'].tolist()
+        i = L.index(s)
+        x = [Df['Établissement santé court séjour'][i],Df['Établissement santé moyen séjour'][i],Df['Établissement santé long séjour'][i],Df['Établissement psychiatrique'][i],Df['Centre lutte cancer'][i],Df['Urgences'][i],Df['Maternité'][i],Df['Centre de santé'][i], Df['Structures psychiatriques en ambulatoire'][i],Df[ 'Centre médecine préventive'][i], Df['Dialyse'][i], Df['Hospitalisation à domicile'][i], Df['Maison de santé pluridisciplinaire'][i], Df["Laboratoire d'analyses et de biologie médicale"][i], Df['Ambulance'][i], Df['Transfusion sanguine'][i], Df['Établissement thermal'][i], Df['Pharmacie'][i]]
+        d=pd.DataFrame({'x':names,'y':x})
+        cam = px.bar(d,x='x', y='y')
+    else:
+        x=[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]    
+        d=pd.DataFrame({'x':names,'y':x})
+        cam = px.bar(d,x='x', y='y')
+    return [cam]
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+    app = dash.Dash(_name_, prevent_initial_callbacks=True)
