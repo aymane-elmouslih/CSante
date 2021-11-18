@@ -1,7 +1,7 @@
 .banner {
     height: 75px;
     margin: 0px -10px 10px;
-    background-color: rgb(66, 129, 247);
+    background-color: 
     border-radius: 2px;
 }
 
@@ -16,16 +16,16 @@
     position: relative;
     float: right;
     right: 10px;
-    top: -60px;
+    top: -15px;
     height: 75px;
 }
 
-body {
-    font-family: sans-serif;
-    background-color:rgb(29, 69, 180)
-}
 h1, h2, h3, h4, h5, h6 {
-    color: rgb(255, 255, 255)
+    color: rgb(255, 255, 255);
+    position: relative;
+    font-size: 60px;
+    left;:40px
+
 }
 
 .app-header {
@@ -38,4 +38,30 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 22px;
     padding-left: 5px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap'); 
+*
+{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    list-style: none;
+    user-select: none;
+}
+
+body
+{
+    background:  linear-gradient(-30deg, #33ccff,#339ace ,#db82db,#81d5ff);  
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+}
+
+div {
+    opacity: 0.99;
+  }
+
+
 
