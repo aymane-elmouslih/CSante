@@ -34,9 +34,9 @@ Exécuter le programme sur votre terminal, il vous donnera une adresse réseau �
 Ne pas hésiter à actualiser la page web jusqu'à qu'elle s'ouvre.
 
 ### Crédits
-Amine Kettani
-Akram Zine
-Ayman El Mouslih
-Marouane Talaa
-Akram Zekriti
-Ibrahim Anagaa
+Amine Kettani,
+Akram Zine,
+Aymane El Mouslih,
+Marouane Talaa,
+Akram Zekriti,
+Ibrahim Anagaa,
